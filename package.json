@@ -1,0 +1,96 @@
+{
+  "name": "continue-lyy",
+  "displayName": "Continue LYY Monitor",
+  "description": "Monitor and log file changes made by Continue extension",
+  "version": "0.0.1",
+  "publisher": "lyy",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionDependencies": [
+    "continue.continue"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:continue-lyy.startMonitoring"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "continue-lyy.startMonitoring",
+        "title": "Continue LYY: Start Monitoring"
+      },
+      {
+        "command": "continue-lyy.stopMonitoring",
+        "title": "Continue LYY: Stop Monitoring"
+      },
+      {
+        "command": "continue-lyy.viewLogs",
+        "title": "Continue LYY: View Logs"
+      },
+      {
+        "command": "continue-lyy.viewStatistics",
+        "title": "Continue LYY: View AI Adoption Statistics"
+      },
+      {
+        "command": "continue-lyy.resetStatistics",
+        "title": "Continue LYY: Reset Statistics"
+      }
+    ],
+    "configuration": {
+      "title": "Continue LYY Monitor",
+      "properties": {
+        "continue-lyy.enableAutoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically start monitoring when VS Code starts"
+        },
+        "continue-lyy.logLevel": {
+          "type": "string",
+          "enum": [
+            "info",
+            "debug",
+            "verbose"
+          ],
+          "default": "info",
+          "description": "Log level for the monitor"
+        },
+        "continue-lyy.uploadEndpoint": {
+          "type": "string",
+          "default": "",
+          "description": "API endpoint for uploading adoption data"
+        },
+        "continue-lyy.uploadInterval": {
+          "type": "number",
+          "default": 300,
+          "description": "Upload interval in seconds (0 to disable auto-upload)"
+        },
+        "continue-lyy.trackOnlyAIChanges": {
+          "type": "boolean",
+          "default": true,
+          "description": "Only track changes made by Continue AI"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {}
+}
